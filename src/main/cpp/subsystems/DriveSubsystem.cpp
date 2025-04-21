@@ -9,7 +9,6 @@ namespace C418
 
     DriveSubsystem::~DriveSubsystem()
     {
-
     }
 
     void DriveSubsystem::Init()
@@ -20,7 +19,7 @@ namespace C418
         m_DriveMotor3.SetInverted(invertLeft);
         m_DriveMotor3.Follow(m_DriveMotor1);
 
-        // Configure Right 
+        // Configure Right
         bool invertRight = false;
         m_DriveMotor2.SetInverted(invertRight);
         m_DriveMotor4.SetInverted(invertRight);

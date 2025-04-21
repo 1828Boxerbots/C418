@@ -10,29 +10,29 @@ namespace C418
 {
     class DriveSubsystem : public frc2::SubsystemBase
     {
-        public:
-            DriveSubsystem();
-            ~DriveSubsystem();
+    public:
+        DriveSubsystem();
+        ~DriveSubsystem();
 
-            void Init();
-            void Periodic() override;
+        void Init();
+        void Periodic() override;
 
-            void Drive(double x, double y);
+        void Drive(double x, double y);
 
-        protected:
-        private:
-            // Left Drive Train
-            ctre::phoenix::motorcontrol::can::VictorSPX m_DriveMotor1 { (int)PortManager::Instance().GetCANId("DriveMotor1") };
-            ctre::phoenix::motorcontrol::can::VictorSPX m_DriveMotor3 { (int)PortManager::Instance().GetCANId("DriveMotor3") };
+    protected:
+    private:
+        // Left Drive Train
+        ctre::phoenix::motorcontrol::can::VictorSPX m_DriveMotor1{(int)PortManager::Instance().GetCANId("DriveMotor1")};
+        ctre::phoenix::motorcontrol::can::VictorSPX m_DriveMotor3{(int)PortManager::Instance().GetCANId("DriveMotor3")};
 
-            // Right Drive Train
-            ctre::phoenix::motorcontrol::can::VictorSPX m_DriveMotor2 { (int)PortManager::Instance().GetCANId("DriveMotor2") };
-            ctre::phoenix::motorcontrol::can::VictorSPX m_DriveMotor4 { (int)PortManager::Instance().GetCANId("DriveMotor4") };
+        // Right Drive Train
+        ctre::phoenix::motorcontrol::can::VictorSPX m_DriveMotor2{(int)PortManager::Instance().GetCANId("DriveMotor2")};
+        ctre::phoenix::motorcontrol::can::VictorSPX m_DriveMotor4{(int)PortManager::Instance().GetCANId("DriveMotor4")};
 
-            frc::DifferentialDrive m_Drive
-            {
-                [&] (double output) { m_DriveMotor1.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, output);},
-                [&] (double output) { m_DriveMotor2.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, output); }
-            };
+        frc::DifferentialDrive m_Drive{
+            [&](double output)
+            { m_DriveMotor1.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, output); },
+            [&](double output)
+            { m_DriveMotor2.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, output); }};
     };
 }

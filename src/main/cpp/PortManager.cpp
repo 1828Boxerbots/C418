@@ -12,7 +12,7 @@ namespace C418
         // NOTE: Currnently does nothing
     }
 
-    PortManager& PortManager::Instance()
+    PortManager &PortManager::Instance()
     {
         static PortManager instance;
         return instance;
