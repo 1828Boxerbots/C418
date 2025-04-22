@@ -14,9 +14,13 @@
  * they are needed.
  */
 
-namespace OperatorConstants
+namespace ShooterConstants
 {
+    constexpr double shootSpeed = 1.0;
+    constexpr double demoShootSpeed = 0.5;
+}
 
-    inline constexpr int kDriverControllerPort = 0;
-
-} // namespace OperatorConstants
+namespace IntakeConstants
+{
+    constexpr double intakeSpeed = 0.75;
+}

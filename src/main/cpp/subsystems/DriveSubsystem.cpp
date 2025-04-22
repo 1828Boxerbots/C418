@@ -1,5 +1,7 @@
 #include "subsystems/DriveSubsystem.hpp"
 
+#include "subsystems/DemoMode.hpp"
+
 namespace C418
 {
     DriveSubsystem::DriveSubsystem()
@@ -31,8 +33,14 @@ namespace C418
 
     void DriveSubsystem::Periodic()
     {
-        // TODO: Check for demo mode
-        m_Drive.SetMaxOutput(1.0);
+        if (DemoMode::GetDemoMode())
+        {
+            m_Drive.SetMaxOutput(0.5);
+        }
+        else
+        {
+            m_Drive.SetMaxOutput(1.0);
+        }
     }
 
     void DriveSubsystem::Drive(double x, double y)

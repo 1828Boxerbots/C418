@@ -8,8 +8,10 @@
 #include <frc2/command/button/CommandXboxController.h>
 
 #include "Constants.h"
-#include "subsystems/ExampleSubsystem.h"
 #include "subsystems/DriveSubsystem.hpp"
+#include "subsystems/DemoMode.hpp"
+#include "subsystems/IntakeSubsystem.hpp"
+#include "subsystems/ShooterSubsystem.hpp"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -28,10 +30,11 @@ public:
 private:
   void ConfigureBindings();
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  frc2::CommandXboxController m_driverController{OperatorConstants::kDriverControllerPort};
+  frc2::CommandXboxController m_driverController{(int)C418::PortManager::Instance().GetUSBPort("DriveController")};
 
   // The robot's subsystems are defined here...
-  ExampleSubsystem m_subsystem;
   C418::DriveSubsystem m_drive;
+  C418::DemoMode m_demoMode;
+  C418::IntakeSubsystem m_intake;
+  C418::ShooterSubsystem m_shooter;
 };

@@ -5,13 +5,25 @@
 #include "RobotContainer.h"
 
 #include <frc2/command/button/Trigger.h>
-
-#include "commands/Autos.h"
-#include "commands/ExampleCommand.h"
+#include <frc2/command/Commands.h>
+#include <frc2/command/RunCommand.h>
 
 RobotContainer::RobotContainer()
 {
   // Initialize all of your commands and subsystems here
+  m_drive.Init();
+  m_drive.SetDefaultCommand(
+      frc2::RunCommand(
+          [this]
+          {
+            m_drive.Drive(
+                m_driverController.GetLeftY(),
+                m_driverController.GetRightX());
+          }));
+
+  m_demoMode.Init();
+  m_intake.Init();
+  m_shooter.Init();
 
   // Configure the button bindings
   ConfigureBindings();
@@ -19,20 +31,28 @@ RobotContainer::RobotContainer()
 
 void RobotContainer::ConfigureBindings()
 {
-  // Configure your trigger bindings here
+  // Shooter
+  m_driverController.RightTrigger().WhileTrue(m_shooter.ShootCmd(ShooterConstants::shootSpeed, ShooterConstants::demoShootSpeed));
+  (m_driverController.RightTrigger() && m_driverController.LeftBumper()).WhileTrue(m_shooter.ShootCmd(-ShooterConstants::shootSpeed, -ShooterConstants::demoShootSpeed));
 
-  // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-  frc2::Trigger([this]
-                { return m_subsystem.ExampleCondition(); })
-      .OnTrue(ExampleCommand(&m_subsystem).ToPtr());
+  // Intake All
+  m_driverController.Y().WhileTrue(m_intake.IntakeAllCmd(IntakeConstants::intakeSpeed));
+  (m_driverController.Y() && m_driverController.LeftBumper()).WhileTrue(m_intake.IntakeAllCmd(-IntakeConstants::intakeSpeed));
 
-  // Schedule `ExampleMethodCommand` when the Xbox controller's B button is
-  // pressed, cancelling on release.
-  m_driverController.B().WhileTrue(m_subsystem.ExampleMethodCommand());
+  // Intake Lower
+  m_driverController.X().WhileTrue(m_intake.IntakeLowCmd(IntakeConstants::intakeSpeed));
+  (m_driverController.X() && m_driverController.LeftBumper()).WhileTrue(m_intake.IntakeLowCmd(-IntakeConstants::intakeSpeed));
+
+  // Intake Mid
+  m_driverController.A().WhileTrue(m_intake.IntakeMidCmd(IntakeConstants::intakeSpeed));
+  (m_driverController.A() && m_driverController.LeftBumper()).WhileTrue(m_intake.IntakeMidCmd(-IntakeConstants::intakeSpeed));
+
+  // Intake Upper
+  m_driverController.B().WhileTrue(m_intake.IntakeUpperCmd(IntakeConstants::intakeSpeed));
+  (m_driverController.B() && m_driverController.LeftBumper()).WhileTrue(m_intake.IntakeUpperCmd(-IntakeConstants::intakeSpeed));
 }
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand()
 {
-  // An example command will be run in autonomous
-  return autos::ExampleAuto(&m_subsystem);
+  return frc2::cmd::Print("No automonous command configured");
 }

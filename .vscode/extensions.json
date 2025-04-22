@@ -4,16 +4,11 @@
         "ms-vscode.cpptools",
         "ms-vscode.cpptools-extension-pack",
         "ms-vscode.cpptools-themes",
-        "twxs.cmake",
-        "josetr.cmake-language-support-vscode",
-        "ms-vscode.cmake-tools",
         "cschlosser.doxdocgen",
         "github.vscode-github-actions",
         "helgardrichard.helium-icon-theme",
         "oderwat.indent-rainbow",
         "christian-kohler.path-intellisense",
-        "slevesque.shader",
-        "Gruntfuggly.todo-tree",
-        "lihui.vs-color-picker"
+        "Gruntfuggly.todo-tree"
     ]
 }
