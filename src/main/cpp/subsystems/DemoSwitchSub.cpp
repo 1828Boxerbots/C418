@@ -4,7 +4,7 @@
 
 bool DemoSwitchSub::Readswitch()
 {
-    return m_DemoSwitch.Get()
+    return m_DemoSwitch.Get();
 }
 
 void DemoSwitchSub::Periodic()
